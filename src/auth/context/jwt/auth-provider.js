@@ -63,7 +63,7 @@ export function AuthProvider({ children }) {
 
         const response = await axios.get(endpoints.auth.me);
 
-        const { user } = response.data;
+        const  user  = response.data;
 
         dispatch({
           type: 'INITIAL',
@@ -105,16 +105,16 @@ export function AuthProvider({ children }) {
 
     const { accessToken, user } = response.data;
 
-    setSession(accessToken);
-
-    dispatch({
-      type: 'LOGIN',
-      payload: {
-        user,
-      },
-    });
+   if (user?.permissions?.includes('admin')) {
+      setSession(accessToken);
+      dispatch({
+        type: 'LOGIN',
+        payload: {
+          user,
+        },
+      });
+    }else throw new Error("User Doesn't have permission");
   }, []);
-
   // REGISTER
   const register = useCallback(async (email, password, firstName, lastName) => {
     const data = {

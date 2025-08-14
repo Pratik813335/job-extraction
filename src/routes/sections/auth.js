@@ -7,6 +7,8 @@ import CompactLayout from 'src/layouts/compact';
 import AuthClassicLayout from 'src/layouts/auth/classic';
 // components
 import { SplashScreen } from 'src/components/loading-screen';
+import AuthModernLayout from 'src/layouts/auth/modern';
+import AuthModernCompactLayout from 'src/layouts/auth/modern-compact';
 
 // ----------------------------------------------------------------------
 
@@ -87,9 +89,9 @@ const authJwt = {
     {
       path: 'login',
       element: (
-        <AuthClassicLayout>
+        <AuthModernCompactLayout>
           <JwtLoginPage />
-        </AuthClassicLayout>
+        </AuthModernCompactLayout>
       ),
     },
     {
