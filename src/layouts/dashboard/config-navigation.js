@@ -85,7 +85,18 @@ export function useNavData() {
               // { title: t('account'), path: paths.dashboard.user.account },
             ],
           },
-
+           // JOB
+          {
+            title: t('job'),
+            path: paths.dashboard.job.root,
+            icon: ICONS.job,
+            children: [
+              { title: t('list'), path: paths.dashboard.job.list },
+              // { title: t('details'), path: paths.dashboard.job.demo.details },
+              // { title: t('create'), path: paths.dashboard.job.new },
+              // { title: t('edit'), path: paths.dashboard.job.demo.edit },
+            ],
+          },
           // PRODUCT
       //     {
       //       title: t('product'),
@@ -136,18 +147,7 @@ export function useNavData() {
       //       ],
       //     },
 
-      //     // JOB
-      //     {
-      //       title: t('job'),
-      //       path: paths.dashboard.job.root,
-      //       icon: ICONS.job,
-      //       children: [
-      //         { title: t('list'), path: paths.dashboard.job.root },
-      //         { title: t('details'), path: paths.dashboard.job.demo.details },
-      //         { title: t('create'), path: paths.dashboard.job.new },
-      //         { title: t('edit'), path: paths.dashboard.job.demo.edit },
-      //       ],
-      //     },
+         
 
       //     // TOUR
       //     {

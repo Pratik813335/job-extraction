@@ -149,16 +149,17 @@ export const paths = {
   //       details: `${ROOTS.DASHBOARD}/order/${MOCK_ID}`,
   //     },
   //   },
-  //   job: {
-  //     root: `${ROOTS.DASHBOARD}/job`,
-  //     new: `${ROOTS.DASHBOARD}/job/new`,
-  //     details: (id) => `${ROOTS.DASHBOARD}/job/${id}`,
-  //     edit: (id) => `${ROOTS.DASHBOARD}/job/${id}/edit`,
-  //     demo: {
-  //       details: `${ROOTS.DASHBOARD}/job/${MOCK_ID}`,
-  //       edit: `${ROOTS.DASHBOARD}/job/${MOCK_ID}/edit`,
-  //     },
-  //   },
+    job: {
+      root: `${ROOTS.DASHBOARD}/job`,
+      new: `${ROOTS.DASHBOARD}/job/new`,
+      list: `${ROOTS.DASHBOARD}/job/list`,
+      details: (id) => `${ROOTS.DASHBOARD}/job/${id}`,
+      edit: (id) => `${ROOTS.DASHBOARD}/job/${id}/edit`,
+      demo: {
+        details: `${ROOTS.DASHBOARD}/job/${MOCK_ID}`,
+        edit: `${ROOTS.DASHBOARD}/job/${MOCK_ID}/edit`,
+      },
+    },
   //   tour: {
   //     root: `${ROOTS.DASHBOARD}/tour`,
   //     new: `${ROOTS.DASHBOARD}/tour/new`,
