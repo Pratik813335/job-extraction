@@ -26,21 +26,21 @@ const TABS = [
     label: 'General',
     icon: <Iconify icon="solar:user-id-bold" width={24} />,
   },
-  {
-    value: 'billing',
-    label: 'Billing',
-    icon: <Iconify icon="solar:bill-list-bold" width={24} />,
-  },
-  {
-    value: 'notifications',
-    label: 'Notifications',
-    icon: <Iconify icon="solar:bell-bing-bold" width={24} />,
-  },
-  {
-    value: 'social',
-    label: 'Social links',
-    icon: <Iconify icon="solar:share-bold" width={24} />,
-  },
+  // {
+  //   value: 'billing',
+  //   label: 'Billing',
+  //   icon: <Iconify icon="solar:bill-list-bold" width={24} />,
+  // },
+  // {
+  //   value: 'notifications',
+  //   label: 'Notifications',
+  //   icon: <Iconify icon="solar:bell-bing-bold" width={24} />,
+  // },
+  // {
+  //   value: 'social',
+  //   label: 'Social links',
+  //   icon: <Iconify icon="solar:share-bold" width={24} />,
+  // },
   {
     value: 'security',
     label: 'Security',
@@ -65,7 +65,7 @@ export default function AccountView() {
         heading="Account"
         links={[
           { name: 'Dashboard', href: paths.dashboard.root },
-          { name: 'User', href: paths.dashboard.user.root },
+          // { name: 'User', href: paths.dashboard.user.root },
           { name: 'Account' },
         ]}
         sx={{
@@ -87,7 +87,7 @@ export default function AccountView() {
 
       {currentTab === 'general' && <AccountGeneral />}
 
-      {currentTab === 'billing' && (
+      {/* {currentTab === 'billing' && (
         <AccountBilling
           plans={_userPlans}
           cards={_userPayment}
@@ -98,7 +98,7 @@ export default function AccountView() {
 
       {currentTab === 'notifications' && <AccountNotifications />}
 
-      {currentTab === 'social' && <AccountSocialLinks socialLinks={_userAbout.socialLinks} />}
+      {currentTab === 'social' && <AccountSocialLinks socialLinks={_userAbout.socialLinks} />} */}
 
       {currentTab === 'security' && <AccountChangePassword />}
     </Container>

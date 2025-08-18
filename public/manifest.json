@@ -1,6 +1,6 @@
 {
-  "name": "Minimal UI",
-  "short_name": "Minimal UI",
+  "name": "Job Extraction",
+  "short_name": "Job Extraction",
   "display": "standalone",
   "start_url": "/",
   "theme_color": "#000000",
