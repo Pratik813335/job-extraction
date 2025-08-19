@@ -24,6 +24,7 @@ const ICONS = {
   chat: icon('ic_chat'),
   mail: icon('ic_mail'),
   user: icon('ic_user'),
+  company: icon('ic_label'),
   file: icon('ic_file'),
   lock: icon('ic_lock'),
   tour: icon('ic_tour'),
@@ -85,18 +86,18 @@ export function useNavData() {
               // { title: t('account'), path: paths.dashboard.user.account },
             ],
           },
-           // JOB
+
+          // COMPANY
           {
-            title: t('job'),
-            path: paths.dashboard.job.root,
-            icon: ICONS.job,
+            title: t('company'),
+            path: paths.dashboard.company.root,
+            icon: ICONS.company,
             children: [
-              { title: t('list'), path: paths.dashboard.job.list },
-              // { title: t('details'), path: paths.dashboard.job.demo.details },
-              // { title: t('create'), path: paths.dashboard.job.new },
-              // { title: t('edit'), path: paths.dashboard.job.demo.edit },
+              { title: t('list'), path: paths.dashboard.company.list },
             ],
+
           },
+
           // PRODUCT
       //     {
       //       title: t('product'),

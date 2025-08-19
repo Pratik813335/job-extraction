@@ -17,6 +17,7 @@ const ROOTS = {
 // ----------------------------------------------------------------------
 
 export const paths = {
+  
   comingSoon: '/coming-soon',
   maintenance: '/maintenance',
   pricing: '/pricing',
@@ -112,6 +113,10 @@ export const paths = {
       //   edit: `${ROOTS.DASHBOARD}/user/${MOCK_ID}/edit`,
       // },
     },
+    company: {
+      root: `${ROOTS.DASHBOARD}/company`,
+      list: `${ROOTS.DASHBOARD}/company/list`,
+    }
   //   product: {
   //     root: `${ROOTS.DASHBOARD}/product`,
   //     new: `${ROOTS.DASHBOARD}/product/new`,
