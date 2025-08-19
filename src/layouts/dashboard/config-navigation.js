@@ -24,6 +24,7 @@ const ICONS = {
   chat: icon('ic_chat'),
   mail: icon('ic_mail'),
   user: icon('ic_user'),
+  company: icon('ic_label'),
   file: icon('ic_file'),
   lock: icon('ic_lock'),
   tour: icon('ic_tour'),
@@ -84,6 +85,17 @@ export function useNavData() {
               // { title: t('edit'), path: paths.dashboard.user.demo.edit },
               // { title: t('account'), path: paths.dashboard.user.account },
             ],
+          },
+
+          // COMPANY
+          {
+            title: t('company'),
+            path: paths.dashboard.company.root,
+            icon: ICONS.company,
+            children: [
+              { title: t('list'), path: paths.dashboard.company.list },
+            ],
+
           },
 
           // PRODUCT
