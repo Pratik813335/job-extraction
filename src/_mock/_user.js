@@ -6,10 +6,17 @@ import { _mock } from './_mock';
 // ----------------------------------------------------------------------
 
 export const USER_STATUS_OPTIONS = [
-  { value: 'active', label: 'Active' },
-  { value: 'pending', label: 'Pending' },
-  { value: 'banned', label: 'Banned' },
-  { value: 'rejected', label: 'Rejected' },
+  { value: '1', label: 'Sync' },
+  { value: '0', label: 'Not Sync' },
+  // { value: 'banned', label: 'Banned' },
+  // { value: 'rejected', label: 'Rejected' },
+];
+
+export const USER_STATUS_OPTIONSS = [
+  // { value: 'sync', label: 'Sync' },
+  // { value: 'not-sync', label: 'Not Sync' },
+  // { value: 'banned', label: 'Banned' },
+  // { value: 'rejected', label: 'Rejected' },
 ];
 
 export const _userAbout = {

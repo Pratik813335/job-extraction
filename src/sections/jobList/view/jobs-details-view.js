@@ -1,15 +1,22 @@
-import PropTypes from 'prop-types';
-import { useCallback } from 'react';
+import { useState, useCallback } from 'react';
 // @mui
-import Box from '@mui/material/Box';
-import Pagination, { paginationClasses } from '@mui/material/Pagination';
+import Tab from '@mui/material/Tab';
+import Tabs from '@mui/material/Tabs';
+import Container from '@mui/material/Container';
 // routes
 import { paths } from 'src/routes/paths';
-import { useRouter } from 'src/routes/hook';
+import { useParams } from 'src/routes/hook';
+// _mock
+import { _jobs, JOB_PUBLISH_OPTIONS, JOB_DETAILS_TABS } from 'src/_mock';
+// components
+import Label from 'src/components/label';
+import { useSettingsContext } from 'src/components/settings';
 //
-import JobItem from './job-item';
 
-// ----------------------------------------------------------------------
+import JobsDetailsToolbar from '../jobs-details-toolbar';
+import JobsDetailsContent from '../jobs-details-content';
+
+
 const mockJob=[
   {
     "id": "1",
@@ -109,64 +116,76 @@ const mockJob=[
   }
 ]
 
+// ----------------------------------------------------------------------
 
-export default function JobList() {
-  const router = useRouter();
+export default function JobsDetailsView() {
+  const settings = useSettingsContext();
 
-  const handleView = useCallback(
-    (id) => {
-      router.push(paths.dashboard.job.details(id));
-    },
-    [router]
-  );
+  const params = useParams();
 
-  const handleEdit = useCallback(
-    (id) => {
-      router.push(paths.dashboard.job.edit(id));
-    },
-    [router]
-  );
+  const { id } = params;
 
-  const handleDelete = useCallback((id) => {
-    console.info('DELETE', id);
+  const currentJob = mockJob.filter((job) => job.id === id)[0];
+
+  const [publish, setPublish] = useState(currentJob?.publish);
+
+  const [currentTab, setCurrentTab] = useState('title');
+
+  const handleChangeTab = useCallback((event, newValue) => {
+    setCurrentTab(newValue);
   }, []);
 
-  return (
-    <>
-      <Box
-        gap={3}
-        display="grid"
-        gridTemplateColumns={{
+  const handleChangePublish = useCallback((newValue) => {
+    setPublish(newValue);
+  }, []);
 
-          xs: 'repeat(1, 1fr)',
-          sm: 'repeat(2, 1fr)',
-          md: 'repeat(3, 1fr)',
-        }}
-      >
-        {mockJob.map((job) => (
-          <JobItem
-            key={job.id}
-            job={job}
-            onView={() => handleView(job.id)}
-            onEdit={() => handleEdit(job.id)}
-            onDelete={() => handleDelete(job.id)}
-          />
-        ))}
-      </Box>
-
-      {mockJob.length > 8 && (
-        <Pagination
-          count={8}
-          sx={{
-            mt: 8,
-            [`& .${paginationClasses.ul}`]: {
-              justifyContent: 'center',
-            },
-          }}
+  const renderTabs = (
+    <Tabs
+      value={currentTab}
+      onChange={handleChangeTab}
+      sx={{
+        mb: { xs: 3, md: 5 },
+      }}
+    >
+      {JOB_DETAILS_TABS.map((tab) => (
+        <Tab
+          key={tab.value}
+          iconPosition="end"
+          value={tab.value}
+          label={tab.label}
+          icon={
+            tab.value === 'candidates' ? (
+              <Label variant="filled">{currentJob?.candidates.length}</Label>
+            ) : (
+              ''
+            )
+          }
         />
-      )}
-    </>
+      ))}
+    </Tabs>
+  );
+
+  return (
+    <Container maxWidth={settings.themeStretch ? false : 'lg'}>
+      <JobsDetailsToolbar
+        backLink={paths.dashboard.job.root}
+        // editLink={paths.dashboard.job.edit(`${currentJob?.id}`)}
+        // liveLink="#"
+        // publish={publish || ''}
+        // onChangePublish={handleChangePublish}
+        // publishOptions={JOB_PUBLISH_OPTIONS}
+      />
+      {renderTabs}
+
+      {currentTab === 'title' && <JobsDetailsContent job={currentJob} />}
+       {/* {mockJob.map((job) => (
+                <JobDetailsContent
+                  key={job.id}
+                  job={job}
+                />
+              ))} */}
+
+    
+    </Container>
   );
 }
-
-

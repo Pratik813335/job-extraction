@@ -265,6 +265,18 @@ export const _roles = [
   'CTO',
 ];
 
+
+export const _jobsOption = [
+  'Full Time',
+  'Part Time ',
+  'Contract',
+  'TimesJobs',
+  'Naukri',
+  'Indeed',
+  'LinkedIn',
+  'Monster',
+];
+
 // ----------------------------------------------------------------------
 
 export const _postTitles = [

@@ -23,7 +23,7 @@ import { useRouter } from 'src/routes/hook';
 import { RouterLink } from 'src/routes/components';
 // _mock
 // import { _companyList } from 'src/_mock/_company';
-import { _roles, USER_STATUS_OPTIONS, USER_STATUS_OPTIONSS } from 'src/_mock';
+import { _jobsOption,  USER_STATUS_OPTIONS } from 'src/_mock';
 // hooks
 import { useBoolean } from 'src/hooks/use-boolean';
 // components
@@ -47,71 +47,135 @@ import {
 // import { TableRow,TableCell } from '@mui/material';
 
 //
-import CompanyTableFiltersResult from '../company-table-filters-result';
-import CompanyTableRow from '../company-table-row';
-import CompanyTableToolbar from '../company-table-toolbar';
+import JobTableRow from '../jobs-table-row';
+import JobTableToolbar from '../jobs-table-toolbar';
+import JobsTableFiltersResult from '../jobs-table-filters-result';
 
 // ----------------------------------------------------------------------
 
-const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...USER_STATUS_OPTIONSS];
+const STATUS_OPTIONS = [{ value: 'all', label: 'All' }, ...USER_STATUS_OPTIONS];
 
-const companyMock = [
+const mockJob=[
   {
-    "id": 1,
-    "companyName": "TechNova Solutions",
-    "address": "123 Main Street, Pune, Maharashtra",
-    "phoneNumber": "+91-9876543210",
-    "email": "contact@technova.com",
-    "status": "active",
-    "role": "Supplier",
-    "createdAt": "2025-08-01T10:30:00Z"
+    "id": "1",
+    "source": "TimesJobs",
+    "title": "Frontend Developer",
+    "company": "M&M Web Solutions",
+    "location": "Kolkata, India",
+     "benefits": ["Health Insurance", "Work from Home", "Flexible Hours"],
+    "description": "Looking for a Frontend Developer with strong skills in HTML5, CSS3, and React.js. Candidates should have a good eye for design and experience with responsive web development.",
+    "skills": ["HTML5", "CSS3", "React.js", "JavaScript", "UI/UX"],
+    "salary": "3 - 6 LPA",
+    "experience": "1 - 3 Years",
+    "jobType": "Full Time",
+    "postedDate": "2025-08-01T09:15:00.000Z",
+    "createdAt": "2025-08-04T11:32:11.524Z",
+    "updatedAt": "2025-08-04T11:32:11.524Z",
+     "isSynced": 1
   },
   {
-    "id": 2,
-    "companyName": "GreenLeaf Industries",
-    "address": "456 Park Avenue, Nashik, Maharashtra",
-    "phoneNumber": "+91-9123456780",
-    "email": "info@greenleaf.com",
-    "status": "rejected",
-    "role": "Client",
-    "createdAt": "2025-08-05T14:20:00Z"
+    "id": "2",
+    "source": "Naukri",
+    "title": "Backend Developer",
+    "company": "TechNova Pvt Ltd",
+    "location": "Bangalore, India",
+     "benefits": ["Health Insurance", "Work from Home", "Flexible Hours"],
+    "description": "We are seeking a Backend Developer skilled in Node.js, Express, and MongoDB. The candidate should have experience building scalable APIs and working with cloud services.",
+    "skills": ["Node.js", "Express", "MongoDB", "REST API", "AWS"],
+    "salary": "6 - 10 LPA",
+    "experience": "2 - 5 Years",
+    "jobType": "Full Time",
+    "postedDate": "2025-08-05T10:00:00.000Z",
+    "createdAt": "2025-08-05T12:45:00.000Z",
+    "updatedAt": "2025-08-05T12:45:00.000Z",
+     "isSynced": 1
   },
   {
-    "id": 3,
-    "companyName": "BlueOcean Tech",
-    "address": "789 Silicon Valley Road, Mumbai",
-    "phoneNumber": "+91-9988776655",
-    "email": "support@blueocean.com",
-    "status": "pending",
-    "role": "Partner",
-    "createdAt": "2025-08-10T09:15:00Z"
+    "id": "3",
+    "source": "LinkedIn",
+    "title": "UI/UX Designer",
+    "company": "Designify",
+    "location": "Remote",
+     "benefits": ["Health Insurance", "Work from Home", "Flexible Hours"],
+    "description": "Creative UI/UX Designer with knowledge of Figma and Adobe XD. Should be able to create modern, responsive interfaces and work closely with developers.",
+    "skills": ["Figma", "Adobe XD", "Wireframing", "Prototyping", "Responsive Design"],
+    "salary": "5 LPA",
+    "experience": "3 - 6 Years",
+    "jobType": "Contract",
+    "postedDate": "2025-08-07T14:30:00.000Z",
+    "createdAt": "2025-08-07T14:45:00.000Z",
+    "updatedAt": "2025-08-07T14:45:00.000Z",
+     "isSynced": 0
   },
-  {
-    "id": 4,
-    "companyName": "NextGen Corp",
-    "address": "22 IT Park, Bangalore",
-    "phoneNumber": "+91-9090909090",
-    "email": "hello@nextgen.com",
-    "status": "active",
-    "role": "HR Manager",
-    "createdAt": "2025-08-12T16:45:00Z"
+    {
+    "id": "4",
+    "source": "Naukri",
+    "title": "React Developer",
+    "company": "Designify",
+    "location": "Remote",
+     "benefits": ["Health Insurance", "Work from Home", "Flexible Hours"],
+    "description": "Creative UI/UX Designer with knowledge of Figma and Adobe XD. Should be able to create modern, responsive interfaces and work closely with developers.",
+    "skills": ["Familier with React", "JavaScript", "CSS", "HTML", "Responsive Design"],
+    "salary": "5 LPA",
+    "experience": "3 - 6 Years",
+    "jobType": "Contract",
+    "postedDate": "2025-08-07T14:30:00.000Z",
+    "createdAt": "2025-08-07T14:45:00.000Z",
+    "updatedAt": "2025-08-07T14:45:00.000Z",
+     "isSynced": 1
+  },
+    {
+    "id": "5",
+    "source": "LinkedIn",
+    "title": "UI/UX Designer",
+    "company": "Designify",
+    "location": "Remote",
+    "benefits": ["Health Insurance", "Work from Home", "Flexible Hours"],
+    "description": "Creative UI/UX Designer with knowledge of Figma and Adobe XD. Should be able to create modern, responsive interfaces and work closely with developers.",
+    "skills": ["Figma", "Adobe XD", "Wireframing", "Prototyping", "Responsive Design"],
+    "salary": "5 LPA",
+    "experience": "3 - 6 Years",
+    "jobType": "Contract",
+    "postedDate": "2025-08-07T14:30:00.000Z",
+    "createdAt": "2025-08-07T14:45:00.000Z",
+    "updatedAt": "2025-08-07T14:45:00.000Z",
+     "isSynced": 0
+  },
+    {
+    "id": "6",
+    "source": "Naukri",
+    "title": "UI/UX Designer",
+    "company": "Designify",
+    "location": "Remote",
+    "description": "Creative UI/UX Designer with knowledge of Figma and Adobe XD. Should be able to create modern, responsive interfaces and work closely with developers.",
+    "skills": ["Figma", "Adobe XD", "Wireframing", "Prototyping", "Responsive Design"],
+    "salary": "5 LPA",
+    "experience": "3 - 6 Years",
+    "jobType": "Contract",
+    "postedDate": "2025-08-07T14:30:00.000Z",
+    "createdAt": "2025-08-07T14:45:00.000Z",
+    "updatedAt": "2025-08-07T14:45:00.000Z",
+    "isSynced": 1
   }
 ]
 
 
 const TABLE_HEAD = [
-  { id: 'companyName', label: 'Company Name' },
-  { id: 'address', label: 'Addrerss'},
-  { id: 'phoneNumber', label: 'Phone Number'},
-  { id: 'email', label: 'Email'},
-  { id: 'status', label: 'Status'},
-  { id: 'role', label: 'Role'},
+  { id: 'title', label: 'Title' },
+  { id: 'source', label: 'Source' },
+  { id: 'company', label: 'Company'},
+  { id: 'experience', label: 'Experience'},
+  { id: 'skills', label: 'Skills'},
+  { id: 'salary', label: 'Salary'},
+  { id: 'jobType', label: 'Job Type'},
+  { id: 'isSynced', label: 'is Sync'},
   { id: 'createdAt', label: 'Created At'},
-  { id: '', width: 88 },
+  {id:'postedDate', label: 'Posted Date'},
+  { id: '',label:'Actions', width: 88 },
 ];
 
 const defaultFilters = {
-  companyName: '',
+  name: '',
   email: '',
   role: [],
   status: 'all',
@@ -119,7 +183,7 @@ const defaultFilters = {
 
 // ----------------------------------------------------------------------
 
-export default function CompanyListView() {
+export default function JobsListView() {
   const table = useTable();
 
   const settings = useSettingsContext();
@@ -128,7 +192,7 @@ export default function CompanyListView() {
 
   const confirm = useBoolean();
 
-  const [tableData, setTableData] = useState(companyMock);
+  const [tableData, setTableData] = useState(mockJob);
 
   const [filters, setFilters] = useState(defaultFilters);
 
@@ -150,16 +214,21 @@ export default function CompanyListView() {
   const notFound = (!dataFiltered.length && canReset) || !dataFiltered.length;
 
   const handleFilters = useCallback(
-    (companyName, value) => {
+    (name, value) => {
       table.onResetPage();
       setFilters((prevState) => ({
         ...prevState,
-        [companyName]: value,
+        [name]: value,
       }));
     },
     [table]
   );
-
+const handleView = useCallback(
+    (id) => {
+      router.push(paths.dashboard.job.details(id));
+    },
+    [router]
+  );
   const handleDeleteRow = useCallback(
     (id) => {
       const deleteRow = tableData.filter((row) => row.id !== id);
@@ -181,12 +250,12 @@ export default function CompanyListView() {
     });
   }, [dataFiltered.length, dataInPage.length, table, tableData]);
 
-  const handleEditRow = useCallback(
-    (id) => {
-      router.push(paths.dashboard.company.edit(id));
-    },
-    [router]
-  );
+  // const handleEditRow = useCallback(
+  //   (id) => {
+  //     router.push(paths.dashboard.company.edit(id));
+  //   },
+  //   [router]
+  // );
 
   const handleFilterStatus = useCallback(
     (event, newValue) => {
@@ -206,7 +275,7 @@ export default function CompanyListView() {
           heading="List"
           links={[
             { name: 'Dashboard', href: paths.dashboard.root },
-            { name: 'Company', href: paths.dashboard.company.root },
+            { name: 'Jobs', href: paths.dashboard.job.root },
             { name: 'List' },
           ]}
           // action={
@@ -245,37 +314,33 @@ export default function CompanyListView() {
                       ((tab.value === 'all' || tab.value === filters.status) && 'filled') || 'soft'
                     }
                     color={
-                      (tab.value === 'active' && 'success') ||
-                      (tab.value === 'pending' && 'warning') ||
-                      (tab.value === 'banned' && 'error') ||
+                      (tab.value === '1' && 'success') ||
+                      (tab.value === '0' && 'warning') ||
+                    //   (tab.value === 'banned' && 'error') ||
                       'default'
-                    }
+                     }
                   >
                     {tab.value === 'all' && tableData.length}
-                    {tab.value === 'active' &&
-                      tableData.filter((company) => company.status === 'active').length}
+                     {tab.value === '1' &&
+                      tableData.filter((isSynced) => isSynced.status === '1').length}
 
-                    {tab.value === 'pending' &&
-                      tableData.filter((company) => company.status === 'pending').length}
-                    {tab.value === 'banned' &&
-                      tableData.filter((company) => company.status === 'banned').length}
-                    {tab.value === 'rejected' &&
-                      tableData.filter((company) => company.status === 'rejected').length}
+                    {tab.value === '0' &&
+                      tableData.filter((isSynced) => isSynced.status === '0').length}
                   </Label>
                 }
               />
             ))}
           </Tabs>
 
-          <CompanyTableToolbar
+          <JobTableToolbar
             filters={filters}
             onFilters={handleFilters}
             //
-            roleOptions={_roles}
+            roleOptions={_jobsOption}
           />
 
           {canReset && (
-            <CompanyTableFiltersResult
+            <JobsTableFiltersResult
               filters={filters}
               onFilters={handleFilters}
               //
@@ -331,13 +396,14 @@ export default function CompanyListView() {
                         table.page * table.rowsPerPage + table.rowsPerPage
                       )
                       .map((row) => (
-                        <CompanyTableRow
+                        <JobTableRow
                           key={row.id}
                           row={row}
                           selected={table.selected.includes(row.id)}
                           onSelectRow={() => table.onSelectRow(row.id)}
-                          onDeleteRow={() => handleDeleteRow(row.id)}
-                          onEditRow={() => handleEditRow(row.id)}
+                            onViewRow={() => handleView(row.id)}
+                          // onDeleteRow={() => handleDeleteRow(row.id)}
+                          // onEditRow={() => handleEditRow(row.id)}
                         />
                       ))
                   ) : (
@@ -396,7 +462,7 @@ export default function CompanyListView() {
 // ----------------------------------------------------------------------
 
 function applyFilter({ inputData, comparator, filters }) {
-  const { companyName, status, email } = filters;
+  const { name, status, email,role } = filters;
 
   const stabilizedThis = inputData.map((el, index) => [el, index]);
 
@@ -408,18 +474,31 @@ function applyFilter({ inputData, comparator, filters }) {
 
   inputData = stabilizedThis.map((el) => el[0]);
 
-  if (companyName) {
-    inputData = inputData.filter(
-      (company) => company.companyName.toLowerCase().indexOf(companyName.toLowerCase()) !== -1
+    if (name) {
+    inputData = inputData.filter((job) =>
+      Object.values(job).some((value) => String(value).toLowerCase().includes(name.toLowerCase()))
     );
   }
 
-  if (status !== 'all') {
-    inputData = inputData.filter((company) => company.status === status);
-  }
+if (role.length > 0) {
+  inputData = inputData.filter((job) =>
+    role.some((r) =>
+      job.source.toLowerCase().includes(r.toLowerCase()) ||
+      (job.jobType && job.jobType.toLowerCase().includes(r.toLowerCase()))
+    )
+  );
+}
+
+
+
+
+if (status !== 'all') {
+  inputData = inputData.filter((job) => String(job.isSynced) === status);
+}
+
 
   if (email.length) {
-    inputData = inputData.filter((company) => email.includes(company.email));
+    inputData = inputData.filter((job) => email.includes(job.email));
   }
 
   return inputData;

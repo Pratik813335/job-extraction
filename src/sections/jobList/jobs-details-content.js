@@ -17,7 +17,7 @@ import Markdown from 'src/components/markdown';
 
 // ----------------------------------------------------------------------
 
-export default function JobDetailsContent({ job }) {
+export default function JobsDetailsContent({ job }) {
 const { id, title, company,source, createdAt,benefits, candidates,description,postedDate,updatedAt, experience,jobType, employmentTypes, salary,skills, role } =
     job;
 
@@ -135,6 +135,6 @@ const { id, title, company,source, createdAt,benefits, candidates,description,po
   );
 }
 
-JobDetailsContent.propTypes = {
+JobsDetailsContent.propTypes = {
   job: PropTypes.object,
 };

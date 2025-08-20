@@ -6,8 +6,15 @@ import { _mock } from './_mock';
 // ----------------------------------------------------------------------
 
 export const JOB_DETAILS_TABS = [
-  { value: 'content', label: 'Job Content' },
-  { value: 'candidates', label: 'Candidates' },
+  // { value: 'content', label: 'Job Content' },
+  // { value: 'candidates', label: 'Candidates' },
+];
+
+export const JOB_STATUS_OPTIONS = [
+  { value: '1', label: 'Sync' },
+  { value: '0', label: 'Not Sync' },
+  // { value: 'banned', label: 'Banned' },
+  // { value: 'rejected', label: 'Rejected' },
 ];
 
 export const JOB_SKILL_OPTIONS = [

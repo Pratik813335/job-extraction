@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 // @mui
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
+
 import MenuItem from '@mui/material/MenuItem';
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
@@ -11,15 +11,17 @@ import ListItemText from '@mui/material/ListItemText';
 // hooks
 import { useBoolean } from 'src/hooks/use-boolean';
 // components
+import { Tooltip } from '@mui/material';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 import CustomPopover, { usePopover } from 'src/components/custom-popover';
 import { ConfirmDialog } from 'src/components/custom-dialog';
 
+
 // ----------------------------------------------------------------------
 
-export default function CompanyTableRow({ row, selected, onEditRow, onSelectRow, onDeleteRow }) {
-  const { companyName,email , address, phoneNumber, status, role, createdAt } = row;
+export default function JobTableRow({ row, selected, onViewRow, onSelectRow, onDeleteRow }) {
+  const { title,source , company, experience, skills,isSynced, salary,jobType, createdAt,postedDate } = row;
 
   const confirm = useBoolean();
   const popover = usePopover();
@@ -33,9 +35,9 @@ export default function CompanyTableRow({ row, selected, onEditRow, onSelectRow,
         </TableCell> */}
 
         {/* Company Name & Email */}
-        <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
+        <TableCell  sx={{ display: 'flex', alignItems: 'center' }}>
           <ListItemText
-            primary={companyName || 'N/A'}
+            primary={title || 'N/A'}
             // secondary={email || 'N/A'}
             primaryTypographyProps={{ typography: 'body2' }}
             // secondaryTypographyProps={{ component: 'span', color: 'text.disabled' }}
@@ -43,33 +45,39 @@ export default function CompanyTableRow({ row, selected, onEditRow, onSelectRow,
         </TableCell>
 
         {/* Address */}
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{address || 'N/A'}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{source || 'N/A'}</TableCell>
 
         {/* Phone Number */}
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{phoneNumber || 'N/A'}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{company || 'N/A'}</TableCell>
 
         {/* Email */}
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{email || 'N/A'}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{experience || 'N/A'}</TableCell>
 
         {/* Status */}
         <TableCell sx={{ whiteSpace: 'nowrap' }}>
-          <Label
-            variant="soft"
-            color={
-              (status === 'active' && 'success') ||
-              (status === 'pending' && 'warning') ||
-              (status === 'banned' && 'error') ||
-              (status === 'rejected' && 'error') ||
-              'default'
-            }
-          >
-            {status || 'N/A'}
-          </Label>
-        </TableCell>
+  {skills && skills.length > 0 ? skills.toString() : 'N/A'}
+</TableCell>
+
+
 
         {/* Role */}
-        <TableCell sx={{ whiteSpace: 'nowrap' }}>{role || 'N/A'}</TableCell>
+        <TableCell sx={{ whiteSpace: 'nowrap' }}>{salary || 'N/A'}</TableCell>
 
+         <TableCell sx={{ whiteSpace: 'nowrap' }}>{jobType || 'N/A'}</TableCell>
+         <TableCell sx={{ whiteSpace: 'nowrap' }}>
+  <Label color={isSynced === 1 ? 'success' : 'warning'}>
+    {isSynced === 1 ? 'Sync' : 'Not Sync'}
+  </Label>
+</TableCell>
+
+
+<TableCell sx={{ whiteSpace: 'nowrap' }}>
+          {postedDate ? new Date(postedDate).toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric',
+          }) : 'N/A'}
+        </TableCell>
 
         {/* Created At */}
         <TableCell sx={{ whiteSpace: 'nowrap' }}>
@@ -81,17 +89,17 @@ export default function CompanyTableRow({ row, selected, onEditRow, onSelectRow,
         </TableCell>
 
         {/* Actions */}
-        {/* <TableCell align="right" sx={{ px: 1, whiteSpace: 'nowrap' }}>
-          <Tooltip title="Edit" placement="top" arrow>
-            <IconButton color="primary" onClick={onEditRow}>
-              <Iconify icon="solar:pen-bold" />
+         <TableCell align="right" sx={{ px: 1, whiteSpace: 'nowrap' }}>
+          <Tooltip title="View Job">
+            <IconButton onClick={onViewRow}>
+              <Iconify icon="carbon:view-filled" />
             </IconButton>
-          </Tooltip>
-
-          <IconButton color={popover.open ? 'inherit' : 'default'} onClick={popover.onOpen}>
+         </Tooltip>
+          {/* <IconButton color={popover.open ? 'inherit' : 'default'} onClick={popover.onOpen}>
+          <ToolTip>
             <Iconify icon="eva:more-vertical-fill" />
-          </IconButton>
-        </TableCell> */}
+          </IconButton> */}
+        </TableCell> 
       </TableRow>
 
       {/* Popover */}
@@ -119,33 +127,25 @@ export default function CompanyTableRow({ row, selected, onEditRow, onSelectRow,
       </CustomPopover> */}
 
       {/* Confirm Delete Dialog */}
-      <ConfirmDialog
+      {/* <ConfirmDialog
         open={confirm.value}
         onClose={confirm.onFalse}
         title="Delete"
         content={`Are you sure you want to delete ${companyName || ''}?`}
         action={
           <Button variant="contained" color="error" onClick={onDeleteRow}>
-            Delete
+            View
           </Button>
         }
-      />
+      /> */}
     </>
   );
 }
 
-CompanyTableRow.propTypes = {
-  row: PropTypes.shape({
-    companyName: PropTypes.string,
-    address: PropTypes.string,
-    phoneNumber: PropTypes.string,
-    email: PropTypes.string,
-    status: PropTypes.string,
-    role: PropTypes.string,
-    createdAt: PropTypes.string,
-  }).isRequired,
+JobTableRow.propTypes = {
+  row: PropTypes.object,
   selected: PropTypes.bool,
-  onEditRow: PropTypes.func.isRequired,
-  onSelectRow: PropTypes.func.isRequired,
-  onDeleteRow: PropTypes.func.isRequired,
+  onViewRow: PropTypes.func,
+  onSelectRow: PropTypes.func,
+  onDeleteRow: PropTypes.func,
 };

@@ -38,7 +38,7 @@ export default function JobItem({ job, onView, onEdit, onDelete }) {
 
         <Stack sx={{ p: 3, pb: 2 }}>
           <Avatar
-            alt={company.company}
+            alt={company}
             // src={company.logo}
             variant="rounded"
             sx={{ width: 48, height: 48, mb: 2 }}
